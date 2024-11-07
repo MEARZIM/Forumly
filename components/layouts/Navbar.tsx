@@ -4,7 +4,7 @@ import { getServerSession } from 'next-auth'
 import SearchBar from './SearchBar'
 import { authOptions } from '@/auth'
 import { Icons } from '../icons/Icons'
-import {UserAccountNav} from './UserAccountNav'
+import { UserAccountNav } from './UserAccountNav'
 import { buttonVariants } from '@/components/ui/button'
 
 const Navbar = async () => {
@@ -25,11 +25,18 @@ const Navbar = async () => {
                 {session?.user ? (
                     <UserAccountNav user={session.user} />
                 ) : (
-                    <Link href='/signIn' className={buttonVariants({
-                        variant: "outline",
-                    })}>
-                        Sign In
-                    </Link>
+                    <div className='flex gap-2'>
+                        <Link href='/signIn' className={buttonVariants({
+                            variant: "outline",
+                        })}>
+                            Sign In
+                        </Link>
+                        <Link href='/signUp' className={buttonVariants({
+                            variant: "outline",
+                        })}>
+                            Sign Up
+                        </Link>
+                    </div>
                 )}
 
             </div>

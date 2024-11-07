@@ -4,9 +4,9 @@ import { ChevronLeft } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
 import { buttonVariants } from '@/components/ui/button'
-import { SignIn as SignInComponent } from '@/components/layouts/SignIn';
+import { SignUp } from '@/components/layouts/SignUp'
 
-const SignInPage = () => {
+const SignUpPage = () => {
   return (
     <section>
       <div className='absolute inset-0'>
@@ -23,7 +23,7 @@ const SignInPage = () => {
               Home
             </Link>
 
-            <SignInComponent />
+            <SignUp />
           </div>
         </div>
       </div>
@@ -31,4 +31,4 @@ const SignInPage = () => {
   )
 }
 
-export default SignInPage
+export default SignUpPage
