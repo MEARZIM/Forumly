@@ -34,7 +34,7 @@ A unique social media platform that enables users to share, discuss, and connect
 ### Go to the project directory
 
 ```bash
-  cd musefinder
+  cd Forumly
 ```
 
 ### Install all the libraries
