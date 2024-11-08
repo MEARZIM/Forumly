@@ -5,6 +5,7 @@ import { Inter } from 'next/font/google';
 import { Toaster } from '@/components/ui/toaster';
 import Navbar from '@/components/layouts/Navbar';
 import SessionProviders from '@/providers/Session-Provider';
+import TanstackProvider from '@/providers/Tanstack-Provider';
 
 import '@/styles/globals.css';
 
@@ -31,14 +32,16 @@ export default function RootLayout({
       )}
     >
       <body className='min-h-screen pt-12 bg-slate-50 antialiased'>
-        <SessionProviders>
-          <Navbar />
-          {authModal}
-          <div className='container max-w-7xl mx-auto h-full pt-12'>
-            {children}
-          </div>
-        </SessionProviders>
-        <Toaster />
+        <TanstackProvider>
+          <SessionProviders>
+            <Navbar />
+            {authModal}
+            <div className='container max-w-7xl mx-auto h-full pt-12'>
+              {children}
+            </div>
+          </SessionProviders>
+          <Toaster />
+        </TanstackProvider>
       </body>
     </html>
   );
