@@ -1,14 +1,52 @@
-import React from 'react'
+import * as React from 'react'
+import { notFound } from 'next/navigation'
 
-const CommunityPage = ({ params }: {
+import { db } from '@/lib/db'
+import { getAuthSession } from '@/auth'
+import { INFINITE_SCROLL_PAGINATION_NUMBER } from '@/config'
+
+const CommunityPage = async ({ 
+    params 
+}: {
     params: {
         slug: string
     }
 }) => {
+
+    const session = await getAuthSession()
+
+    const { slug } = await params;
+
+    const subForum = await db.subforum.findFirst({
+        where: { 
+            name: slug 
+        },
+        include: {
+            posts: {
+                include: {
+                    author: true,
+                    votes: true,
+                    comments: true,
+                    subForum: true
+                },
+                orderBy: {
+                    createdAt: 'desc'
+                },
+                take: INFINITE_SCROLL_PAGINATION_NUMBER,
+            },
+        },
+    })
+
+    if (!subForum) {
+        return notFound()
+    }
+
     return (
-        <div>
-            {params.slug ? params.slug : "No data available."}
-        </div>
+        <>
+            <h1 className='font-bold text-3xl md:text-4xl h-14'>
+                r/{subForum.name}
+            </h1>
+        </>
     )
 }
 
