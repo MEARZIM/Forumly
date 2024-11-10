@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import { db } from '@/lib/db'
 import { getAuthSession } from '@/auth'
 import { INFINITE_SCROLL_PAGINATION_NUMBER } from '@/config'
+import { MiniCreatePost } from '@/components/layouts/MiniCreatePost'
 
 const CommunityPage = async ({ 
     params 
@@ -43,9 +44,11 @@ const CommunityPage = async ({
 
     return (
         <>
-            <h1 className='font-bold text-3xl md:text-4xl h-14'>
+            <h1 className='font-bold text-3xl md:text-4xl h-14 mx-2'>
                 r/{subForum.name}
             </h1>
+            <MiniCreatePost session={session} />
+            {/* Dispaly post */}
         </>
     )
 }
