@@ -100,8 +100,12 @@ const CommunityPageLayout = async ({
                             ) : null}
 
                             {subforum.creatorId !== session?.user?.id ? (
-                                <SubscriberToggleButton  />
-                            ) : null }
+                                <SubscriberToggleButton
+                                    subforumId={subforum.id}
+                                    subforumName={subforum.name}
+                                    isSubscribed={isSubscribed}
+                                />
+                            ) : null}
 
                             <Link
                                 className={buttonVariants({

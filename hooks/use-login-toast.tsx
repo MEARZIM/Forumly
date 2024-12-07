@@ -13,7 +13,7 @@ export const useLoginToast = () => {
         <Link
           onClick={() => dismiss()}
           href='/signIn'
-          className={buttonVariants({ variant: 'outline' })}>
+          className={buttonVariants({ variant: 'loginToastButton' })}>
           Login
         </Link>
       ),

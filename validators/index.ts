@@ -7,4 +7,10 @@ export const SubforumValidatorSchema = z.object({
          message: "Community name must be up to 18 characters."
     }),
 });
-export type CreateSubForumPayload = z.infer<typeof SubforumValidatorSchema>
+
+export const SubforumSubscriptionValidator = z.object({
+    subforumId: z.string()
+});
+
+export type CreateSubForumPayload = z.infer<typeof SubforumValidatorSchema>;
+export type SubscribeToSubForumPayload = z.infer<typeof SubforumSubscriptionValidator>;
