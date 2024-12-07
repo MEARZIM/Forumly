@@ -23,10 +23,10 @@ const SubscriberToggleButton = ({
     isSubscribed
 }: SubscriberToggleButtonProps) => {
 
-    const { loginToast } = useLoginToast();
     const router = useRouter();
+    const { loginToast } = useLoginToast();
 
-    const { mutate: subscribe, isPending } = useMutation({
+    const { mutate: subscribe, isPending: isSubscribedPending } = useMutation({
         mutationFn: async () => {
             const payload: SubscribeToSubForumPayload = {
                 subforumId: subforumId
@@ -76,19 +76,82 @@ const SubscriberToggleButton = ({
         }
     })
 
+    const { mutate: unSubscribe, isPending: isUnSubscribedPending } = useMutation({
+        mutationFn: async () => {
+            const payload: SubscribeToSubForumPayload = {
+                subforumId: subforumId
+            }
+
+            const { data } = await axios.post('/api/subforum/unsubscribe', payload);
+            return data as string;
+        },
+        onError: (error: AxiosError) => {
+
+            if (error.response?.status === 400) {
+                return toast({
+                    title: 'Please Subscribe',
+                    description: 'You are not subscribed.',
+                    variant: 'destructive',
+                });
+            }
+
+            if (error.response?.status === 401) {
+                return loginToast();
+            }
+
+            if (error.response?.status === 402) {
+                return toast({
+                    title: 'Forum cannot deleted',
+                    description: 'You can not unsubscribe this forum beacuse you created it.',
+                    variant: 'destructive',
+                });
+            }
+
+            if (error.response?.status === 422) {
+                return toast({
+                    title: 'Invalid subforum name.',
+                    description: 'Please choose a name between 2 and 18 letters.',
+                    variant: 'destructive',
+                });
+            }
+
+            return toast({
+                title: 'An error occurred.',
+                description: 'Something went wrong. Please try again later.',
+                variant: 'destructive',
+            });
+
+        },
+        onSuccess: () => {
+            startTransition(() => {
+                router.refresh();
+            })
+
+            return toast({
+                title: 'Canceled subscription',
+                description: `You are now not subscribed to r/${subforumName} Subforum.`,
+                variant: 'destructive',
+            })
+        }
+    })
+
     return (
         <>
             {
                 isSubscribed ?
                     (
-                        <Button className='w-full mt1 mb-4 ' >
+                        <Button
+                            disabled={isUnSubscribedPending}
+                            onClick={() => unSubscribe()}
+                            className='w-full mt1 mb-4 '
+                        >
                             Leave Community
                         </Button>
                     )
                     :
                     (
                         <Button
-                            disabled={isPending}
+                            disabled={isSubscribedPending}
                             onClick={() => subscribe()}
                             className='w-full mt1 mb-4 '
                         >

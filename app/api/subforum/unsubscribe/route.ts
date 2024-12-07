@@ -26,19 +26,33 @@ export async function POST(req: Request) {
             }
         })
 
-        if (subscriptionExists) {
-            return new NextResponse('You already subscribed to this Subforum', {
+        if (!subscriptionExists) {
+            return new NextResponse('You are not subscribed.', {
                 status: 400,
             })
         }
 
-
-        await db.subscription.create({
-            data: {
-                userId: session.user.id,
-                subforumId: subforumId,
+        // Check if the user is the creator of the subforum
+        const creator = await db.subforum.findFirst({
+            where : {
+                id: subforumId,
+                creatorId: session.user.id
             }
         })
+
+        if (creator) {
+            return new NextResponse('You can not unsubscribe this forum beacuse you created it.', {
+                status: 402,
+            })
+        }
+
+        await db.subscription.deleteMany({
+            where: {
+                subforumId: subforumId,
+                userId: session.user.id,
+            },
+        });
+
 
         return NextResponse.json(subforumId, { status: 200 });
 
