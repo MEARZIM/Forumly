@@ -7,6 +7,7 @@ import { db } from '@/lib/db'
 import { getAuthSession } from '@/auth'
 import { buttonVariants } from '@/components/ui/button'
 import { TextHighlighter } from "@/components/ui/Text-Highlight";
+import SubscriberToggleButton from '@/components/layouts/SubscriberToggleButton'
 
 const CommunityPageLayout = async ({
     children,
@@ -61,10 +62,10 @@ const CommunityPageLayout = async ({
     })
 
     return (
-        <div className='h-full max-w-7xl mx-auto sm:container '>
-            <div>
+        <section className=' h-full max-w-7xl mx-auto sm:container pt-10'>
+            <div className=''>
                 {/* Back to feed */}
-                <div className='grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-x-4 py-6'>
+                <div className='grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-x-4 py-4'>
                     <div className='flex flex-col col-span-2 space-y-6'>
                         {children}
                     </div>
@@ -98,7 +99,9 @@ const CommunityPageLayout = async ({
                                 </div>
                             ) : null}
 
-                            {/* Subscribe toggle button */}
+                            {subforum.creatorId !== session?.user?.id ? (
+                                <SubscriberToggleButton  />
+                            ) : null }
 
                             <Link
                                 className={buttonVariants({
@@ -114,7 +117,7 @@ const CommunityPageLayout = async ({
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     )
 }
 

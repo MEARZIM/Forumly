@@ -25,7 +25,9 @@ const Navbar = async () => {
 
                 {/* actions */}
                 {session?.user ? (
-                    <UserAccountNav user={session.user} />
+                    <div>
+                        <UserAccountNav user={session.user} />
+                    </div>
                 ) : (
                     <div className='flex gap-2'>
                         <Link href='/signIn' className={buttonVariants({
