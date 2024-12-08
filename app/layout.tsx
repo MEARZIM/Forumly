@@ -31,7 +31,7 @@ export default function RootLayout({
         inter.className
       )}
     >
-      <body className=' bg-slate-50 antialiased'>
+      <body className='antialiased'>
         <TanstackProvider>
           <SessionProviders>
             <Navbar />
