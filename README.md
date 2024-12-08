@@ -19,7 +19,7 @@ A unique social media platform that enables users to share, discuss, and connect
 ## Technology Stack:
 
 - **Frontend:** Next.js, TypeScript, TailwindCSS
-- **Backend:** Node.js, OpenAi, MongoDB
+- **Backend:** Node.js, MongoDB, uploadthing
 - **Authentication:** NextAuth 
 
 
@@ -64,6 +64,8 @@ To run this project, you will need to add the following environment variables to
 `GOOGLE_CLIENT_ID`
 
 `GOOGLE_CLIENT_SECRET`
+
+`UPLOADTHING_TOKEN`
 ## Feedback
 
 If you have any feedback, please reach out to us at asahaayan@gmail.com
