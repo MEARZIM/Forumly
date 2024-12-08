@@ -83,6 +83,7 @@ const PostFeed = ({
                                 subforumName={post.subForum.name}
                                 votesAmount={votesAmount}
                                 currentVote={currentVote}
+                                currentUserId={session?.user?.id}
                             />
                         </li>
                     )
@@ -95,6 +96,7 @@ const PostFeed = ({
                             subforumName={post.subForum.name}
                             votesAmount={votesAmount}
                             currentVote={currentVote}
+                            currentUserId={session?.user?.id}
                         />
                     )
                 }
