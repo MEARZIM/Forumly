@@ -1,7 +1,7 @@
 "use client"
 
 import axios from 'axios';
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Loader2 } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import { useIntersection } from '@mantine/hooks';
@@ -22,9 +22,9 @@ const PostFeed = ({
     initialPosts,
     subforumName
 }: PostFeedProps) => {
-    
+
     const { data: session } = useSession();
-    
+
     const containerRef = useRef<HTMLElement>(null);
     const { ref, entry } = useIntersection({
         root: containerRef.current,
@@ -58,6 +58,12 @@ const PostFeed = ({
         }
     })
 
+    useEffect(() => {
+        if (entry?.isIntersecting) {
+            fetchNextPage();
+        }
+    }, [entry, fetchNextPage])
+
     const posts = data.pages.flatMap((page) => page) ?? initialPosts;
 
     return (
@@ -74,7 +80,7 @@ const PostFeed = ({
                 )
 
                 if (index === posts.length - 1) {
-                    
+
                     return (
                         <li key={post.id} ref={ref}>
                             <Post
