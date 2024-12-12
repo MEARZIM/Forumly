@@ -5,6 +5,7 @@ import { getAuthSession } from "@/auth";
 import { PostVoteValidator } from "@/validators";
 import { db } from "@/lib/db";
 import { CachedPost } from "@/types/redis";
+import { redis } from "@/lib/redis";
 
 
 const CACHE_AFTER_UPLOAD = 1;
@@ -81,15 +82,15 @@ export async function PATCH(req: Request) {
             }
 
             // Recount the votes
-            const voteCount = post.votes.reduce((count, vote) =>{
-                if(vote.type === 'UP') {
-                    return count+1
+            const voteCount = post.votes.reduce((count, vote) => {
+                if (vote.type === 'UP') {
+                    return count + 1
                 }
-                if(vote.type === 'DOWN') {
-                    return count-1
+                if (vote.type === 'DOWN') {
+                    return count - 1
                 }
                 return count
-            },0);
+            }, 0);
 
             if (voteCount >= CACHE_AFTER_UPLOAD) {
                 const cachePayload: CachedPost = {
@@ -100,9 +101,43 @@ export async function PATCH(req: Request) {
                     createdAt: post.createdAt,
                     currentVote: voteType,
                 }
+                await redis.hset(`post:${post.id}`, cachePayload);
             }
+
+            return NextResponse.json("Voted successfully", { status: 200 });
         }
 
+        await db.vote.create({
+            data: {
+                type: voteType,
+                userId: session.user.id,
+                postId: post.id
+            }
+        })
+
+        const voteCount = post.votes.reduce((count, vote) => {
+            if (vote.type === 'UP') {
+                return count + 1
+            }
+            if (vote.type === 'DOWN') {
+                return count - 1
+            }
+            return count
+        }, 0);
+
+        if (voteCount >= CACHE_AFTER_UPLOAD) {
+            const cachePayload: CachedPost = {
+                id: post.id,
+                authorUsername: post.author.username ?? "",
+                content: JSON.stringify(post.content),
+                title: post.title,
+                createdAt: post.createdAt,
+                currentVote: voteType,
+            }
+            await redis.hset(`post:${post.id}`, cachePayload);
+        }
+
+        return NextResponse.json("Voted successfully", { status: 200 });
 
     } catch (error) {
         if (error instanceof z.ZodError) {
@@ -110,7 +145,7 @@ export async function PATCH(req: Request) {
         }
 
         return new NextResponse(
-            'Failed to post the subforum. Please try again later...',
+            'Failed to vote the subforum. Please try again later...',
             { status: 500 }
         )
     }

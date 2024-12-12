@@ -1,17 +1,20 @@
 "use client"
 
-import React, { useEffect, useState } from 'react'
+import React, {
+    useEffect,
+    useState
+} from 'react'
 import { VoteType } from '@prisma/client'
-import { usePrevious } from '@mantine/hooks'
-
-import { useLoginToast } from '@/hooks/use-login-toast'
-import { useMutation } from '@tanstack/react-query'
-import { PostVoteRequest } from '@/validators'
 import axios, { AxiosError } from 'axios'
-import { toast } from '@/hooks/use-toast'
-import { Button } from '@/components/ui/button'
+import { usePrevious } from '@mantine/hooks'
+import { useMutation } from '@tanstack/react-query'
 import { ArrowBigDown, ArrowBigUp } from 'lucide-react'
+
 import { cn } from '@/lib/utils'
+import { toast } from '@/hooks/use-toast'
+import { PostVoteRequest } from '@/validators'
+import { Button } from '@/components/ui/button'
+import { useLoginToast } from '@/hooks/use-login-toast'
 
 
 interface Props {
@@ -47,7 +50,7 @@ const PostVoteClient = ({
                 postId: postId,
             }
 
-            await axios.patch('/api/subforum/post/vote', payload)
+            await axios.patch('/api/subforum/posts/vote', payload)
         },
         onError: (err, voteType) => {
             if (voteType === 'UP') {
@@ -67,7 +70,7 @@ const PostVoteClient = ({
 
             return toast({
                 title: 'Something went wrong.',
-                description: 'Your vote was not registered. Please try again.',
+                description: 'Your vote was not registered. Please try again...',
                 variant: 'destructive',
             })
         },
@@ -77,8 +80,7 @@ const PostVoteClient = ({
                 setCurrentVote(undefined)
                 if (type === 'UP') {
                     setVoteAmmount((prev) => prev - 1)
-                }
-                else if (type === 'DOWN') {
+                }else if (type === 'DOWN') {
                     setVoteAmmount((prev) => prev + 1)
                 }
             } else {
