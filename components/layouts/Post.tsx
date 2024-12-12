@@ -26,6 +26,7 @@ import {
 import AlertModal from '@/components/modals/alert-modal'
 
 import EditorOutput from './EditorOutput'
+import PostVoteClient from './Post-Vote/PostVoteClient'
 
 
 type PartialVote = Pick<Vote, 'type'>
@@ -96,42 +97,53 @@ const Post = ({
     <div className='rounded-md bg-white shadow'>
       <div className='px-6 py-4 flex justify-between'>
         {/* Display post votes */}
+        <PostVoteClient
+          postId={post.id}
+          initialVote={_currentVote?.type}
+          initialVoteAmmount={_votesAmount}
+        />
 
         <div className='w-0 flex-1'>
-          <div className='max-h-40 flex items-center justify-start mt-1 text-xs text-gray-500'>
+          <div className="max-h-40 flex flex-wrap items-center justify-start gap-2 mt-1 text-xs text-gray-500">
             {subforumName ? (
               <>
                 <a
-                  className='underline text-zinc-900 text-sm underline-offset-2'
+                  className="underline text-zinc-900 text-sm underline-offset-2"
                   href={`/community/${subforumName}`}
                 >
                   r/{subforumName}
                 </a>
-                <span className='px-1'><Dot /></span>
+                <span className="px-1">
+                <Dot />
+              </span>
               </>
             ) : null}
-            <span >
-              Posted by
-              <a
-                className='hover:cursor-pointer pl-1 hover:text-zinc-900'
-                href={`/user/${post.author.username}`}
-              >
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger className='hover:underline'>
-                      u/{post.author.username}
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      Go to the user page
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
+            
+              
+              <span className="flex items-center">
+                Posted by
+                <a
+                  className="hover:cursor-pointer pl-1 hover:text-zinc-900"
+                  href={`/user/${post.author.username}`}
+                >
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger className="hover:underline">
+                        u/{post.author.username}
+                      </TooltipTrigger>
+                      <TooltipContent>Go to the user page</TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                </a>
+              </span>
+              <span className="px-1 flex items-center">
+                <Dot />
+              </span>
+              <span className="flex items-center">{formatTimeToNow(new Date(post.createdAt))}</span>
+           
 
-              </a>
-            </span>
-            <span className='px-1'><Dot /></span>
-            {formatTimeToNow(new Date(post.createdAt))}
           </div>
+
 
           {/* Title Part */}
           <a href={`/community/${subforumName}/post/${post.id}`}>

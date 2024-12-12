@@ -7,17 +7,18 @@ import ProfileTabs from "./components/Profile-Tabs";
 import ProfileModeratorCard from "./components/Profile-Moderator-Card";
 import ProfileStatsCard from "./components/Profile-Stats-Card";
 import Leftsidebar from "./components/Left-Sidebar";
+import { notFound } from "next/navigation";
 
 const SingleUserPage = async ({
     params 
 }: {
         params: Promise<{ slug: string }>
 }) => {
-    // Unwrapping the params using `React.use`
+    
     const slug = (await params).slug
 
     if (!slug) {
-        return <div>Error: User not found</div>;
+        return notFound();
     }
 
     return (

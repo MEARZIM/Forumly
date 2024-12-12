@@ -29,3 +29,12 @@ export const PostValidator = z.object({
 })
 
 export type PostCreationRequest = z.infer<typeof PostValidator>
+
+
+// Votes Validator
+export const PostVoteValidator = z.object({
+    postId: z.string(),
+    voteType: z.enum(['UP', 'DOWN']),
+})
+
+export type PostVoteRequest = z.infer<typeof PostVoteValidator>
