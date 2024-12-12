@@ -11,32 +11,20 @@ import {
     CollapsibleContent,
     CollapsibleTrigger,
 } from "@/components/ui/collapsible"
-
-interface Props {
-    isSidebarOpen: boolean
-    setIsSidebarOpen: (value: boolean) => void
-}
-const Leftsidebar = ({
-    isSidebarOpen,
-    setIsSidebarOpen
-}: Props) => {
+import { useSidebar } from "@/hooks/use-sidebar"
 
 
-    const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen)
+const Leftsidebar = () => {
+
+    const sidebar = useSidebar();
 
     return (
         <div>
-            {/* Open Sidebar Button for Mobile */}
-            <div className="p-4 lg:hidden">
-                <Button variant="ghost" onClick={toggleSidebar} className="flex items-center">
-                    <Menu className="mr-2 h-4 w-4" />
-                    Open Sidebar
-                </Button>
-            </div>
+
 
             {/* Sidebar */}
             <aside
-                className={`fixed top-0 left-0 z-50 h-screen w-64 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 transition-transform duration-300 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+                className={`fixed top-0 left-0 z-50 h-screen w-64 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 transition-transform duration-300 ${sidebar.isOpen ? "translate-x-0" : "-translate-x-full"
                     } lg:translate-x-0 lg:static`}
             >
                 <ScrollArea className="h-full">
@@ -119,7 +107,7 @@ const Leftsidebar = ({
                             </CollapsibleTrigger>
                             <CollapsibleContent className="space-y-1">
                                 <Button variant="ghost" className="w-full justify-start pl-6">
-                                    About Reddit
+                                    About Forumly
                                 </Button>
                             </CollapsibleContent>
                         </Collapsible>
@@ -128,10 +116,10 @@ const Leftsidebar = ({
             </aside>
 
             {/* Background overlay for mobile */}
-            {isSidebarOpen && (
+            {sidebar.isOpen && (
                 <div
                     className="fixed inset-0 z-40 bg-black bg-opacity-50 lg:hidden"
-                    onClick={toggleSidebar}
+                    onClick={sidebar.onClose}
                 ></div>
             )}
         </div>
