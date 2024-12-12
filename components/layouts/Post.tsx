@@ -27,6 +27,7 @@ import AlertModal from '@/components/modals/alert-modal'
 
 import EditorOutput from './EditorOutput'
 import PostVoteClient from './Post-Vote/PostVoteClient'
+import { formatDistanceToNow } from 'date-fns/formatDistanceToNow'
 
 
 type PartialVote = Pick<Vote, 'type'>
@@ -104,7 +105,7 @@ const Post = ({
         />
 
         <div className='w-0 flex-1'>
-          <div className="max-h-40 flex flex-wrap items-center justify-start gap-2 mt-1 text-xs text-gray-500">
+          {/* <div className="max-h-40 flex flex-wrap items-center justify-start gap-2 mt-1 text-xs text-gray-500">
             {subforumName ? (
               <>
                 <a
@@ -142,12 +143,34 @@ const Post = ({
               <span className="flex items-center">{formatTimeToNow(new Date(post.createdAt))}</span>
            
 
+          </div> */}
+
+          <div>
+            <a
+              href={`/community/${subforumName}`}
+              className="font-bold text-gray-900 hover:underline"
+            >
+              <h3 className="font-semibold text-gray-900 dark:text-gray-100">r/{subforumName}</h3>
+
+            </a>
+            <p className="text-sm text-gray-500 dark:text-gray-400">Posted by
+              <a
+                href={`/user/${post.author.username}`}
+                className="ml-1 hover:underline"
+              >
+                u/{post.author.username}
+              </a>
+              <span className="mx-1">•</span>
+              <span>{formatTimeAgo(post.createdAt)}</span>
+            </p>
           </div>
+
+
 
 
           {/* Title Part */}
           <a href={`/community/${subforumName}/post/${post.id}`}>
-            <h1 className='text-lg font-semibold py-2 leading-6 text-gray-900'>
+            <h1 className='text-2xl font-semibold pt-4 pb-2 leading-6 text-gray-900'>
               {post.title}
             </h1>
           </a>
@@ -202,3 +225,9 @@ const Post = ({
   )
 }
 export default Post
+
+function formatTimeAgo(date: Date): string {
+  return formatDistanceToNow(date, { addSuffix: true })
+    .replace('about ', '')
+    .replace('less than a minute ago', 'just now')
+}
