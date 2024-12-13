@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { format } from 'date-fns'
-import { notFound, usePathname } from 'next/navigation'
+import { notFound } from 'next/navigation'
 
 import { db } from '@/lib/db'
 import { getAuthSession } from '@/auth'

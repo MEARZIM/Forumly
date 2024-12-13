@@ -74,7 +74,7 @@ const ProfileTabs = () => {
                             </div>
                         </div>
                         <h2 className="text-xl font-bold mb-2 text-gray-900 dark:text-gray-100">Kapoor Family is Royalty of Bollywood and it shows ----</h2>
-                        <p className="text-gray-700 dark:text-gray-300 mb-4">Raj Kapoor wasn't famous for doing theatre but for the films he directed and acted in. Who Produced those films is irrelevant, what is relevant is who directed them. Ppl went to watch the Raj Kapoor directed film, not the RK Studios produced film. You should check the verdict of the that last 1999 RK Studios produced film to check whether I am saying the truth or not</p>
+                        <p className="text-gray-700 dark:text-gray-300 mb-4">Raj Kapoor was not famous for doing theatre but for the films he directed and acted in. Who Produced those films is irrelevant, what is relevant is who directed them. Ppl went to watch the Raj Kapoor directed film, not the RK Studios produced film. You should check the verdict of the that last 1999 RK Studios produced film to check whether I am saying the truth or not</p>
                         <div className="flex items-center gap-4 text-gray-500 dark:text-gray-400">
                             <Button variant="ghost" size="sm" className="hover:bg-orange-100 dark:hover:bg-orange-800">
                                 <ArrowBigUp className="w-4 h-4 mr-1" />

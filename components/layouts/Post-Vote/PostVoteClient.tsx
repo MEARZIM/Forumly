@@ -44,7 +44,6 @@ const PostVoteClient = ({
     const {
         mutate: vote,
         isPending,
-        isSuccess,
     } = useMutation({
         mutationFn: async (type: VoteType) => {
             const payload: PostVoteRequest = {

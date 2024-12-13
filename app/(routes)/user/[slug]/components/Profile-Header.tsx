@@ -1,14 +1,14 @@
 "use client"
 
 import React from 'react'
-import { Menu, MessageCircle, MoreHorizontal, Plus } from 'lucide-react'
+import { Menu, MessageCircle, Plus } from 'lucide-react'
 
 import { Button } from "@/components/ui/button"
 import { useSidebar } from '@/hooks/use-sidebar'
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 
 interface Props {
-    userData: String
+    userData: string
 }
 
 const ProfileHeader = ({

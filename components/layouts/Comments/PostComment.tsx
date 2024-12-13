@@ -2,7 +2,7 @@
 
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
-import { Dot, MessageSquare, MessagesSquare } from 'lucide-react'
+import { Dot, MessageSquare } from 'lucide-react'
 import { useRef, useState } from 'react'
 import { useSession } from 'next-auth/react'
 import { useMutation } from '@tanstack/react-query'

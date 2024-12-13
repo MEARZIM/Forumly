@@ -6,7 +6,7 @@ import { useRef, useState } from 'react'
 import { toast } from '@/hooks/use-toast'
 import { formatTimeToNow } from '@/lib/utils'
 import { useMutation } from '@tanstack/react-query'
-import { Dot, Menu, MessageSquare } from 'lucide-react'
+import { Menu, MessageSquare } from 'lucide-react'
 import { Post as UserPost, User, Vote } from '@prisma/client'
 
 

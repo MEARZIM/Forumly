@@ -4,14 +4,12 @@ import { db } from '@/lib/db'
 import { Sidebar } from '@/components/layouts/Sidebar'
 import ProfileStatsCard from './components/Profile-Stats-Card'
 import ProfileModeratorCard from './components/Profile-Moderator-Card'
-import { getAuthSession } from '@/auth'
 
 const layout = async ({
     children
 }: {
     children: React.ReactNode
 }) => {
-    const session = await getAuthSession();
     
 
     const resentSubForum = await db.subforum.findMany({

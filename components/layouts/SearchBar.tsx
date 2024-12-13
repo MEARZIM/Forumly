@@ -11,7 +11,6 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import {
   Command,
   CommandEmpty,
-  CommandGroup,
   CommandInput,
   CommandItem,
   CommandList,

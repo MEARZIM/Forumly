@@ -1,5 +1,4 @@
 import React from 'react'
-import { notFound } from 'next/navigation';
 import { HeartCrack, MessagesSquare } from 'lucide-react';
 
 import { db } from '@/lib/db';

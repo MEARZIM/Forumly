@@ -32,14 +32,9 @@ const PostFeed = ({
     });
 
     const {
-        status,
         data,
-        error,
-        isFetching,
         isFetchingNextPage,
         fetchNextPage,
-        hasNextPage,
-        hasPreviousPage,
     } = useInfiniteQuery({
         queryKey: ['posts'],
         queryFn: async ({ pageParam }) => {
