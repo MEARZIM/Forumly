@@ -1,28 +1,76 @@
-'use client'
+'use client';
 
-import * as React from "react"
-import { ChevronDown, Home, Rocket, Menu } from 'lucide-react'
-import { Button } from "@/components/ui/button"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Separator } from "@/components/ui/separator"
+import Link from "next/link";
+import { Suspense } from "react";
+import { Subforum } from "@prisma/client";
+import { usePathname } from "next/navigation";
+import { ChevronDown, Home, Rocket } from 'lucide-react';
+
+import { cn } from "@/lib/utils";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Separator } from "@/components/ui/separator";
 import {
     Collapsible,
     CollapsibleContent,
     CollapsibleTrigger,
-} from "@/components/ui/collapsible"
-import { useSidebar } from "@/hooks/use-sidebar"
+} from "@/components/ui/collapsible";
+import { useSidebar } from "@/hooks/use-sidebar";
+import { Skeleton } from "@/components/ui/skeleton"
+import { Button, buttonVariants } from "@/components/ui/button";
 
 
-export const Sidebar = () => {
 
+interface Props {
+    resentSubForum?: Subforum[];
+    communitySubForum?: Subforum[];
+}
+
+
+const RecentSubforums = ({ resentSubForum }: { resentSubForum: Subforum[] }) => (
+    <div>
+        {resentSubForum.map((forum) => (
+            <Link
+                key={forum.id}
+                href={`/community/${forum.name}`}
+                className={cn(
+                    buttonVariants({
+                        variant: "sidebarButton",
+                    }),
+                    "w-full justify-start",
+                )}
+            >
+                r/{forum.name}
+            </Link>
+        ))}
+    </div>
+);
+
+const CommunitySubforums = ({ communitySubForum }: { communitySubForum: Subforum[] }) => (
+    <CollapsibleContent className="space-y-1">
+        {communitySubForum.map((forum) => (
+            <Link
+                key={forum.id}
+                href={`/community/${forum.name}`}
+                className={cn(
+                    buttonVariants({
+                        variant: "sidebarButton",
+                    }),
+                    "w-full justify-start",
+                )}
+            >
+                {forum.name}
+            </Link>
+        ))}
+    </CollapsibleContent>
+);
+
+export const Sidebar = ({ resentSubForum, communitySubForum }: Props) => {
+    const url = usePathname();
     const sidebar = useSidebar();
+    
 
     return (
         <div>
-
-
-            {/* Sidebar */}
             <aside
                 className={`fixed top-0 left-0 z-50 h-screen w-64 bg-inherit dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 transition-transform duration-300 ${sidebar.isOpen ? "translate-x-0" : "-translate-x-full"
                     } lg:translate-x-0 lg:static`}
@@ -30,14 +78,32 @@ export const Sidebar = () => {
                 <ScrollArea className="h-full">
                     <div className="p-4 space-y-4">
                         <div className="space-y-1">
-                            <Button variant="sidebarButton" className="w-full justify-start">
+                            <Link
+                                href="/"
+                                className={cn(
+                                    buttonVariants({
+                                        variant: "sidebarButton",
+                                    }),
+                                    "w-full justify-start",
+                                    url === '/' ? `bg-white text-black` : ``
+                                )}
+                            >
                                 <Home className="mr-2 h-4 w-4" />
                                 Home
-                            </Button>
-                            <Button variant="sidebarButton" className="w-full justify-start">
+                            </Link>
+                            <Link
+                                href="/popular"
+                                className={cn(
+                                    buttonVariants({
+                                        variant: "sidebarButton",
+                                    }),
+                                    "w-full justify-start",
+                                    url === '/popular' ? `bg-white text-black` : ``
+                                )}
+                            >
                                 <Rocket className="mr-2 h-4 w-4" />
                                 Popular
-                            </Button>
+                            </Link>
                         </div>
 
                         <Separator />
@@ -46,51 +112,10 @@ export const Sidebar = () => {
                             <h3 className="mb-2 px-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">
                                 Recent
                             </h3>
-                            <Button variant="sidebarButton" className="w-full justify-start">
-                                <Avatar className="w-4 h-4 mr-2">
-                                    <AvatarImage src="/placeholder.svg" alt="r/BollyBlindsNGossip" />
-                                    <AvatarFallback>BB</AvatarFallback>
-                                </Avatar>
-                                r/BollyBlindsNGossip
-                            </Button>
+                            <Suspense fallback={<Skeleton className="h-6 w-[60px]" />}>
+                                {resentSubForum && <RecentSubforums resentSubForum={resentSubForum} />}
+                            </Suspense>
                         </div>
-
-                        <Collapsible>
-                            <CollapsibleTrigger asChild>
-                                <Button variant="sidebarButton" className="w-full justify-between">
-                                    <span className="flex items-center">
-                                        <span className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">
-                                            Topics
-                                        </span>
-                                    </span>
-                                    <ChevronDown className="h-4 w-4" />
-                                </Button>
-                            </CollapsibleTrigger>
-                            <CollapsibleContent className="space-y-1">
-                                <Button variant="sidebarButton" className="w-full justify-start pl-6">
-                                    Internet Culture (Viral)
-                                </Button>
-                                <Button variant="sidebarButton" className="w-full justify-start pl-6">
-                                    Games
-                                </Button>
-                                <Button variant="sidebarButton" className="w-full justify-start pl-6">
-                                    Q&As
-                                </Button>
-                                <Button variant="sidebarButton" className="w-full justify-start pl-6">
-                                    Technology
-                                </Button>
-                                <Button variant="sidebarButton" className="w-full justify-start pl-6">
-                                    Pop Culture
-                                </Button>
-                                <Button variant="sidebarButton" className="w-full justify-start pl-6">
-                                    Movies & TV
-                                </Button>
-                            </CollapsibleContent>
-                        </Collapsible>
-
-                        <Button variant="sidebarButton" className="w-full justify-start text-sm">
-                            See more
-                        </Button>
 
                         <Separator />
 
@@ -99,23 +124,47 @@ export const Sidebar = () => {
                                 <Button variant="sidebarButton" className="w-full justify-between">
                                     <span className="flex items-center">
                                         <span className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">
-                                            Resources
+                                            TOPICS
                                         </span>
                                     </span>
                                     <ChevronDown className="h-4 w-4" />
                                 </Button>
                             </CollapsibleTrigger>
-                            <CollapsibleContent className="space-y-1">
-                                <Button variant="sidebarButton" className="w-full justify-start pl-6">
-                                    About Forumly
+                            <Suspense fallback={<Skeleton className="h-6 w-[60px]" />}>
+                                {communitySubForum && <CommunitySubforums communitySubForum={communitySubForum} />}
+                            </Suspense>
+                        </Collapsible>
+
+                        <Collapsible>
+                            <CollapsibleTrigger asChild>
+                                <Button variant="sidebarButton" className="w-full justify-between">
+                                    <span className="flex items-center">
+                                        <span className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">
+                                            RESOURSE
+                                        </span>
+                                    </span>
+                                    <ChevronDown className="h-4 w-4" />
                                 </Button>
+                            </CollapsibleTrigger>
+                            <CollapsibleContent>
+                                <Link
+                                    href="/about"
+                                    className={cn(
+                                        buttonVariants({
+                                            variant: "sidebarButton",
+                                        }),
+                                        "w-full justify-start pl-6",
+
+                                    )}
+                                >
+                                    About Forumly
+                                </Link>
                             </CollapsibleContent>
                         </Collapsible>
                     </div>
                 </ScrollArea>
             </aside>
 
-            {/* Background overlay for mobile */}
             {sidebar.isOpen && (
                 <div
                     className="fixed inset-0 z-40 bg-black bg-opacity-50 lg:hidden"
@@ -123,7 +172,5 @@ export const Sidebar = () => {
                 ></div>
             )}
         </div>
-    )
-}
-
-
+    );
+};
