@@ -21,12 +21,14 @@ interface Props {
     postId: string
     initialVoteAmmount: number
     initialVote?: VoteType | null
+    classname?: string
 }
 
 const PostVoteClient = ({
     postId,
     initialVoteAmmount,
-    initialVote
+    initialVote,
+    classname
 }: Props) => {
     const { loginToast } = useLoginToast();
 
@@ -80,7 +82,7 @@ const PostVoteClient = ({
                 setCurrentVote(undefined)
                 if (type === 'UP') {
                     setVoteAmmount((prev) => prev - 1)
-                }else if (type === 'DOWN') {
+                } else if (type === 'DOWN') {
                     setVoteAmmount((prev) => prev + 1)
                 }
             } else {
@@ -101,7 +103,10 @@ const PostVoteClient = ({
 
 
         <>
-            <div className='flex flex-col items-center gap-4 sm:gap-0 px-2 pb-4 sm:pb-0'>
+            <div className={cn(
+                'flex flex-col items-center gap-4 sm:gap-0 px-2 pb-4 sm:pb-0',
+                classname
+            )}>
                 {/* upvote */}
                 <Button
                     onClick={() => vote('UP')}

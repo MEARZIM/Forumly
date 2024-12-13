@@ -45,7 +45,6 @@ const PostFeed = ({
         queryFn: async ({ pageParam }) => {
             const query = `/api/post?limit=${INFINITE_SCROLL_PAGINATION_NUMBER}&page=${pageParam}` + (!!subforumName ? `&subforumName=${subforumName}` : "");
             const res = await axios.get(query);
-            console.log(res);
             return res.data as ExtendedPost[];
         },
         initialPageParam: 1,
