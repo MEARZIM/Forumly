@@ -1,7 +1,7 @@
 import { Suspense } from 'react'
+import { Dot } from 'lucide-react'
 import { notFound } from 'next/navigation'
 import { Post, User, Vote } from '@prisma/client'
-import { ArrowBigDown, ArrowBigUp, Dot, Loader2 } from 'lucide-react'
 
 import { db } from '@/lib/db'
 import { redis } from '@/lib/redis'
@@ -10,6 +10,8 @@ import { Skeleton } from "@/components/ui/skeleton"
 import PostVoteServer from '@/components/layouts/Post-Vote/PostVoteServer'
 import EditorOutput from '@/components/layouts/EditorOutput'
 import { formatTimeToNow } from '@/lib/utils'
+import CommentSection from '@/components/layouts/Comments/CommentSection'
+import { Separator } from '@/components/ui/separator'
 
 
 interface Props {
@@ -86,13 +88,24 @@ const page = async ({
                         {post?.title ?? cachedPost.title}
                     </h1>
 
+                    <div className='mb-10'>
+                        <Suspense
+                            fallback={
+                                <SkeletonCard />
+                            }>
+                            <EditorOutput
+                                content={post?.content ?? cachedPost.content}
+                            />
+                        </Suspense>
+                    </div>
+
+                    <Separator className='bg-black' />
+
                     <Suspense
                         fallback={
                             <SkeletonCard />
                         }>
-                        <EditorOutput
-                            content={post?.content ?? cachedPost.content}
-                        />
+                        <CommentSection postId={post?.id ?? cachedPost.id} />
                     </Suspense>
                 </div>
             </div>
