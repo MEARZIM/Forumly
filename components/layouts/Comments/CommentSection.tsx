@@ -1,12 +1,13 @@
 import React from 'react'
 import { notFound } from 'next/navigation';
-import { MessagesSquare } from 'lucide-react';
+import { HeartCrack, MessagesSquare } from 'lucide-react';
 
 import { db } from '@/lib/db';
 import { getAuthSession } from '@/auth'
 import PostComment from './PostComment';
 import CreateComment from './CreateComment';
 import { Separator } from '@/components/ui/separator';
+import { cn } from '@/lib/utils';
 
 interface Props {
     postId: string
@@ -18,7 +19,7 @@ const CommentSection = async ({
 
     const session = await getAuthSession();
 
-    
+
     const comments = await db.comment.findMany({
         where: {
             postId: postId,
@@ -45,10 +46,19 @@ const CommentSection = async ({
                 <Separator
                     className='w-full my-4 bg-black'
                 />
+
                 <div className='flex flex-col gap-y-6 mt-4'>
-                    <h1 className='text-xl font-bold mb-2 underline flex items-center gap-2'>
-                        <MessagesSquare size={20} />
-                        Previous Comments
+                    <h1 className={cn(
+                        'text-xl flex items-center mb-2 gap-2',
+                        comments.length === 0 ? "font-normal text-red-500" : "font-bold  underline"
+                    )}>
+                        {comments.length === 0 ? (<>
+                            No Comments Available
+                            <HeartCrack size={20} />
+                        </>) : (<>
+                            <MessagesSquare size={20} />
+                            Previous Comments
+                        </>)}
                     </h1>
                     {comments.filter((comment) => !comment.replyToId).map((topLevelComment) => {
                         const topLevelCommentVotesAmt = topLevelComment.votes.reduce((acc, vote) => {

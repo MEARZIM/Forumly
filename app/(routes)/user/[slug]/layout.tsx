@@ -1,5 +1,4 @@
 import React from 'react'
-import { notFound } from 'next/navigation'
 
 import { db } from '@/lib/db'
 import { Sidebar } from '@/components/layouts/Sidebar'
@@ -14,9 +13,6 @@ const layout = async ({
 }) => {
     const session = await getAuthSession();
     
-    if (!session?.user) {
-        return notFound();
-    }
 
     const resentSubForum = await db.subforum.findMany({
         take: 2,

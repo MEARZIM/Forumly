@@ -80,11 +80,17 @@ const page = async ({
 
                 <div className='sm:w-0 w-full flex-1 bg-white p-4 rounded-sm'>
                     <p className='max-h-40 mt-1 truncate text-xs text-gray-500 flex items-center'>
-                        Posted by u/{post?.author.username ?? cachedPost.authorUsername}
+                        Posted by
+                        <a
+                            href={`/user/${post?.author.username ?? cachedPost.authorUsername}`}
+                            className="ml-1 hover:underline"
+                        >
+                            u/{post?.author.username ?? cachedPost.authorUsername}
+                        </a>
                         <Dot />
                         {formatTimeToNow(new Date(post?.createdAt ?? cachedPost.createdAt))}
                     </p>
-                    <h1 className='text-2xl font-bold py-2 leading-6 text-gray-900'>
+                    <h1 className='text-3xl font-bold py-2 leading-6 text-gray-900'>
                         {post?.title ?? cachedPost.title}
                     </h1>
 

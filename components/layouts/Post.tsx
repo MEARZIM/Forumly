@@ -152,7 +152,13 @@ const Post = ({
             <DropdownMenuContent>
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem className='hover:cursor-pointer'>More Info</DropdownMenuItem>
+              <DropdownMenuItem className='hover:cursor-pointer'>
+                <a
+                  href={`/community/${subforumName}/post/${post.id}`}
+                >
+                  More Info
+                </a>
+              </DropdownMenuItem>
               {currentUserId === post.authorId && (
                 //  <DropdownMenuItem>Edit</DropdownMenuItem> 
                 <DropdownMenuItem
