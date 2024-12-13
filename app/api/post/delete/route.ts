@@ -49,7 +49,6 @@ export async function POST(req: Request) {
 
         return NextResponse.json({ message: 'Success' }, { status: 200 });
     } catch (err) {
-        console.error(err);
 
         return new NextResponse(
             'Failed to post the subforum. Please try again later...',

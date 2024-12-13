@@ -21,8 +21,10 @@ const ProfileHeader = ({
                 <div>
                     <div className='pb-2'>
                         <Avatar className="w-16 h-16 bg-yellow-300">
-                            <AvatarImage src="/placeholder.svg" alt="Rast987" />
-                            <AvatarFallback>R</AvatarFallback>
+                            {/* <AvatarImage src="/placeholder.svg" alt="Rast987" /> */}
+                            <AvatarFallback className='bg-white'>
+                                {userData.charAt(0).toUpperCase()}
+                            </AvatarFallback>
                         </Avatar>
                     </div>
                     <div className="flex-1 min-w-0">
@@ -39,9 +41,6 @@ const ProfileHeader = ({
                                 <Button variant="secondary" className="flex-1 sm:flex-none">
                                     <MessageCircle className="mr-2 h-4 w-4" />
                                     Chat
-                                </Button>
-                                <Button variant="ghost" size="icon">
-                                    <MoreHorizontal className="h-4 w-4" />
                                 </Button>
                             </div>
                         </div>

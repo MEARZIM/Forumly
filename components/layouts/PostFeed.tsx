@@ -1,7 +1,7 @@
 "use client"
 
 import axios from 'axios';
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Loader2 } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import { useIntersection } from '@mantine/hooks';
@@ -22,9 +22,9 @@ const PostFeed = ({
     initialPosts,
     subforumName
 }: PostFeedProps) => {
-    
+
     const { data: session } = useSession();
-    
+
     const containerRef = useRef<HTMLElement>(null);
     const { ref, entry } = useIntersection({
         root: containerRef.current,
@@ -45,7 +45,6 @@ const PostFeed = ({
         queryFn: async ({ pageParam }) => {
             const query = `/api/post?limit=${INFINITE_SCROLL_PAGINATION_NUMBER}&page=${pageParam}` + (!!subforumName ? `&subforumName=${subforumName}` : "");
             const res = await axios.get(query);
-            console.log(res);
             return res.data as ExtendedPost[];
         },
         initialPageParam: 1,
@@ -57,6 +56,12 @@ const PostFeed = ({
             pageParams: [1]
         }
     })
+
+    useEffect(() => {
+        if (entry?.isIntersecting) {
+            fetchNextPage();
+        }
+    }, [entry, fetchNextPage])
 
     const posts = data.pages.flatMap((page) => page) ?? initialPosts;
 
@@ -74,7 +79,7 @@ const PostFeed = ({
                 )
 
                 if (index === posts.length - 1) {
-                    
+
                     return (
                         <li key={post.id} ref={ref}>
                             <Post
