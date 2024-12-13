@@ -12,7 +12,7 @@ export default async function Home() {
 
   return (
     <>
-      <h1 className='font-bold text-3xl md:text-4xl'>Your feed</h1>
+      <h1 className='font-bold text-3xl md:text-4xl bg-inherit'>Your feed</h1>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-y-2 md:gap-x-2 py-6">
         <div className="col-span-1">
           {/* This will be the search bar */}

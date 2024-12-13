@@ -27,11 +27,11 @@ export default function RootLayout({
     <html
       lang='en'
       className={cn(
-        'bg-white text-slate-900 antialiased light',
+        'text-slate-900 antialiased light',
         inter.className
       )}
     >
-      <body className='antialiased'>
+      <body className='antialiased bg-slate-100'>
         <TanstackProvider>
           <SessionProviders>
             <Navbar />
