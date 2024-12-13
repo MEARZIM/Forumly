@@ -22,7 +22,7 @@ const ProfileHeader = ({
                     <div className='pb-2'>
                         <Avatar className="w-16 h-16 bg-yellow-300">
                             <AvatarImage src="/placeholder.svg" alt="Rast987" />
-                            <AvatarFallback>R</AvatarFallback>
+                            <AvatarFallback className='bg-white'>R</AvatarFallback>
                         </Avatar>
                     </div>
                     <div className="flex-1 min-w-0">
