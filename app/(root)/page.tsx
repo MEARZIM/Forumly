@@ -3,18 +3,25 @@ import { Home as HomeIcon } from "lucide-react";
 
 import { getAuthSession } from "@/auth";
 import { buttonVariants } from "@/components/ui/button";
+import CustomFeed from "@/components/layouts/Home/CustomFeed";
+import GeneralFeed from "@/components/layouts/Home/GeneralFeed";
 
 export default async function Home() {
-  const session = await getAuthSession()
+
+  const session = await getAuthSession();
+
   return (
     <>
       <h1 className='font-bold text-3xl md:text-4xl'>Your feed</h1>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-y-2 md:gap-x-2 py-6">
-        <div>
-          {/* This will be the Feed */}
-          Feed
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-y-2 md:gap-x-2 py-6">
+        <div className="col-span-1">
+          {/* This will be the search bar */}
+          bar
         </div>
-        <div className='overflow-hidden h-fit rounded-lg border border-gray-200 order-first md:order-last'>
+        <div className="col-span-2">
+          {session?.user ? <CustomFeed /> : <GeneralFeed />}
+        </div>
+        <div className='overflow-hidden col-span-1 h-fit rounded-lg border border-gray-200 order-first md:order-last'>
           <div className='bg-emerald-100 px-6 py-4'>
             <div className='font-semibold py-3 gap-1.5'>
               <div className="flex items-center gap-2">

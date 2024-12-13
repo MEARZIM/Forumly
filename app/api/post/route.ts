@@ -9,7 +9,7 @@ import { UrlValidator } from "./constant";
 export async function GET(req: Request) {
     try {
         const url = new URL(req.url);
-       
+
         const session = await getAuthSession();
 
         if (!session?.user) {
@@ -49,20 +49,25 @@ export async function GET(req: Request) {
                 subForum: {
                     name: subforumName as string,
                 }
-            }
+            };
         } else if (session) {
-            whereClause = {
-                subForum: {
-                    id: {
-                        in: validCommunityIds
-                    }
-                },
-            }
+            if (validCommunityIds.length === 0) {
+                whereClause = {};
+            } else {
+                whereClause = {
+                    subForum: {
+                        id: {
+                            in: validCommunityIds
+                        }
+                    },
+                };
+            };
         }
+        console.log(whereClause, validCommunityIds)
 
         const posts = await db.post.findMany({
             take: parseInt(limit),
-            skip: (parseInt(page) - 1) * parseInt(limit), // skip should start from 0 for page 1
+            skip: (parseInt(page) - 1) * parseInt(limit,10), 
             orderBy: {
                 createdAt: 'desc',
             },
