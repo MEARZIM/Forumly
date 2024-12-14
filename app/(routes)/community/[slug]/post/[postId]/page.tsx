@@ -15,9 +15,7 @@ import { Separator } from '@/components/ui/separator'
 
 
 interface Props {
-    params: {
-        postId: string
-    }
+    params: Promise<{ postId: string }>
 }
 
 export const dynamic = 'force-dynamic'

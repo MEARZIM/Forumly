@@ -207,7 +207,7 @@ const Editor = ({
             className='w-full resize-none appearance-none overflow-hidden bg-transparent text-3xl font-bold focus:outline-none'
             ref={(e) => {
               titleRef(e)
-              // @ts-ignore
+              // @ts-expect-error: _titleRef requires an explicit assignment
               _titleRef.current = e
             }}
             {...rest}

@@ -9,15 +9,15 @@ import { buttonVariants } from '@/components/ui/button'
 import { TextHighlighter } from "@/components/ui/Text-Highlight";
 import SubscriberToggleButton from '@/components/layouts/SubscriberToggleButton'
 
+interface Props {
+    params: Promise<{ slug: string }>;
+    children: React.ReactNode;
+}
+
 const CommunityPageLayout = async ({
-    children,
-    params
-}: {
-    children: React.ReactNode
-    params: {
-        slug: string
-    }
-}) => {
+    params,
+    children
+} : Props) => {
 
     const { slug } = await params;
     const session = await getAuthSession()

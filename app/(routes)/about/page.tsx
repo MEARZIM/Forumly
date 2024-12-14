@@ -13,7 +13,7 @@ import StatsSection from './components/StatsSection'
 import Footer from './components/Footer'
 
 
-const page = () => {
+const Page = () => {
    
 
     const [mounted, setMounted] = useState(false)
@@ -125,4 +125,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Page

@@ -7,9 +7,7 @@ import { Button } from '@/components/ui/button';
 import Editor from '@/components/layouts/Editor';
 
 interface Props {
-    params: {
-        slug: string
-    }
+    params: Promise<{ slug: string }>
 }
 const PostSubmitPage = async ({
     params

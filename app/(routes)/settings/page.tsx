@@ -16,7 +16,7 @@ const SettingsPage = async () => {
     <div>
       <UserForm
         user={{
-          id: session?.user.id!,
+          id: session?.user.id || '',
           username: session?.user.username || '',
         }}
         className='w-fit'

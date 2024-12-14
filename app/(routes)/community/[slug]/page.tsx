@@ -10,9 +10,7 @@ import { MiniCreatePost } from '@/components/layouts/MiniCreatePost'
 const CommunityPage = async ({
     params
 }: {
-    params: {
-        slug: string
-    }
+    params: Promise<{ slug: string }>
 }) => {
 
     const session = await getAuthSession()
