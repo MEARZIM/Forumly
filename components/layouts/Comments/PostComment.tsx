@@ -3,7 +3,7 @@
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import { Dot, MessageSquare } from 'lucide-react'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useSession } from 'next-auth/react'
 import { useMutation } from '@tanstack/react-query'
 import { Comment, CommentVote, User } from '@prisma/client'
@@ -43,6 +43,7 @@ const PostComment = ({
     const commentRef = useRef<HTMLDivElement>(null);
 
     const [isReplying, setIsReplying] = useState<boolean>(false);
+    const [isMounted, setIsMounted] = useState(false)
     const [input, setInput] = useState<string>(`@${comment.author.username} `)
 
     const router = useRouter()
@@ -74,6 +75,14 @@ const PostComment = ({
             setIsReplying(false)
         },
     })
+
+    useEffect(() => {
+        setIsMounted(true)
+    }, []);
+
+    if (!isMounted) {
+        return null
+    }
 
     return (
         <>

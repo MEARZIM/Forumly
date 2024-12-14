@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios, { AxiosError } from 'axios'
 import { useRouter } from 'next/navigation'
 import { MessageSquareQuote } from 'lucide-react'
@@ -26,6 +26,7 @@ const CreateComment = ({
     replyToId
 }: CreateCommentProps) => {
     const [input, setInput] = useState<string>('')
+    const [isMounted, setIsMounted] = useState(false)
     const router = useRouter()
     const { loginToast } = useLoginToast()
 
@@ -61,6 +62,14 @@ const CreateComment = ({
             setInput('')
         },
     })
+
+    useEffect(() => {
+        setIsMounted(true)
+    }, []);
+
+    if (!isMounted) {
+        return null
+    }
 
     return (
         <div className='grid w-full gap-1.5'>

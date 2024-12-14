@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios, { AxiosError } from 'axios'
 import { usePrevious } from '@mantine/hooks'
 import { useMutation } from '@tanstack/react-query'
@@ -27,6 +27,7 @@ const CommentVotes = ({
     currentVote: _currentVote,
 }: CommentVotesProps) => {
     const { loginToast } = useLoginToast()
+    const [isMounted, setIsMounted] = useState(false)
     const [votesAmt, setVotesAmt] = useState<number>(_votesAmt)
     const [currentVote, setCurrentVote] = useState<PartialVote | undefined>(
         _currentVote
@@ -76,6 +77,14 @@ const CommentVotes = ({
             }
         },
     })
+
+    useEffect(() => {
+        setIsMounted(true)
+    },[]);
+
+    if(!isMounted) {
+        return null
+    }
 
     return (
         <div className='flex gap-1'>
