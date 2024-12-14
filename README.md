@@ -66,6 +66,11 @@ To run this project, you will need to add the following environment variables to
 `GOOGLE_CLIENT_SECRET`
 
 `UPLOADTHING_TOKEN`
+
+`REDIS_URL`
+
+`REDIS_TOKEN`
+
 ## Feedback
 
 If you have any feedback, please reach out to us at asahaayan@gmail.com
