@@ -1,6 +1,6 @@
-import { SignIn } from "@/components/layouts/SignIn"
-import CloseModalButton from "@/components/ui/closeModalButton"
+"use client"
 
+import { SignIn } from "@/components/layouts/SignIn"
 
 export default function Page() {
   return (
