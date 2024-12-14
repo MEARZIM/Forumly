@@ -1,10 +1,12 @@
-"use client"
 
 import { SignUp } from "@/components/layouts/SignUp"
+import { AuthModal } from "@/components/modals/auth-modal"
 
 
 export default function Page() {
   return (
-    <SignUp />
+    <AuthModal>
+      <SignUp />
+    </AuthModal>
   )
 }
