@@ -63,7 +63,7 @@ export async function GET(req: Request) {
                 };
             };
         }
-        console.log(whereClause, validCommunityIds)
+        // console.log(whereClause, validCommunityIds)
 
         const posts = await db.post.findMany({
             take: parseInt(limit),

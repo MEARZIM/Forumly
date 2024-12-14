@@ -25,7 +25,6 @@ export default async function Home() {
 
   return (
     <>
-      <h1 className='font-bold text-3xl md:text-4xl bg-inherit'>Your feed</h1>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-y-2 md:gap-x-2 py-6">
         <div className="col-span-1">
           <Sidebar
@@ -34,6 +33,7 @@ export default async function Home() {
           />
         </div>
         <div className="col-span-2">
+          <h1 className='font-bold text-3xl md:text-4xl bg-inherit py-6'>Your feed</h1>
           {session?.user ? <CustomFeed /> : <GeneralFeed />}
         </div>
         <div className='overflow-hidden col-span-1 h-fit rounded-lg border border-gray-200 order-first md:order-last'>
