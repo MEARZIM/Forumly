@@ -57,3 +57,15 @@ export const CommentVoteValidator = z.object({
 })
 
 export type CommentVoteRequest = z.infer<typeof CommentVoteValidator>
+
+
+// Username Validator
+export const UsernameValidator = z.object({
+    name: z
+        .string()
+        .min(3, { message: "Username must be at least 3 characters long." })
+        .max(32, { message: "Username cannot exceed 32 characters." })
+        .regex(/^[a-zA-Z0-9_]+$/, {
+            message: "Username can only contain letters, numbers, and underscores.",
+        }),
+})
