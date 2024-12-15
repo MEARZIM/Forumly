@@ -1,9 +1,9 @@
 import React from 'react'
 import { redirect } from 'next/navigation';
 
+import { db } from '@/lib/db';
 import { getAuthSession } from '@/auth'
 import { Sidebar } from '@/components/layouts/Sidebar';
-import { db } from '@/lib/db';
 
 const SettingsLayoutPage = async ({
     children
@@ -14,7 +14,7 @@ const SettingsLayoutPage = async ({
     const session = await getAuthSession();
 
     if (!session?.user) {
-        redirect('/signIn');
+        redirect('/signUp');
     }
 
     const resentSubForum = await db.subforum.findMany({
