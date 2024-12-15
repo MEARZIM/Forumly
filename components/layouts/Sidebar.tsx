@@ -72,7 +72,7 @@ export const Sidebar = ({ resentSubForum, communitySubForum }: Props) => {
     return (
         <div>
             <aside
-                className={`fixed top-0 left-0 z-50 h-screen w-64 bg-inherit dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 transition-transform duration-300 ${sidebar.isOpen ? "translate-x-0" : "-translate-x-full"
+                className={`fixed top-0 left-0 z-50 bg-slate-100 h-screen w-64 dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 transition-transform duration-300 ${sidebar.isOpen ? "translate-x-0" : "-translate-x-full"
                     } lg:translate-x-0 lg:static`}
             >
                 <ScrollArea className="h-full">

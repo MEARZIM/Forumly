@@ -17,7 +17,7 @@ const ProfileHeader = ({
     const sidebar = useSidebar();
     return (
         <>
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex flex-row bg-inherit items-center justify-between gap-4">
                 <div>
                     <div className='pb-2'>
                         <Avatar className="w-16 h-16 bg-yellow-300">

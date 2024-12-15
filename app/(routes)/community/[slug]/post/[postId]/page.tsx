@@ -76,7 +76,7 @@ const page = async ({
                     />
                 </Suspense>
 
-                <div className='sm:w-0 w-full flex-1 bg-white p-4 rounded-sm'>
+                <div className='w-[100px] sm:w-full flex-1 bg-white p-4 rounded-sm'>
                     <p className='max-h-40 mt-1 truncate text-xs text-gray-500 flex items-center'>
                         Posted by
                         <a
