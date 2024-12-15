@@ -1,8 +1,9 @@
 'use client'
 
-import { FC } from 'react'
+import { FC, useEffect, useState } from 'react'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
+
 
 const Output = dynamic(
     async () => (await import('editorjs-react-renderer')).default,
@@ -46,6 +47,15 @@ const style = {
 }
 
 const EditorOutput: FC<EditorOutputProps> = ({ content }) => {
+    const [isMounted, setIsMounted] = useState(false);
+
+    useEffect(() => {
+        setIsMounted(true)
+    }, []);
+
+    if (!isMounted) {
+        return null
+    }
     return (
         <Output
             style={style}

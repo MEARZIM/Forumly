@@ -16,7 +16,7 @@ export async function GET(req: Request) {
             return new Response('Unauthorized', { status: 401 });
         }
 
-        let followedCommunities = await db.subscription.findMany({
+        const followedCommunities = await db.subscription.findMany({
             where: {
                 userId: session.user.id
             },
@@ -26,7 +26,7 @@ export async function GET(req: Request) {
         })
 
         const followedCommunitiesIds = followedCommunities.map(({ subforum }) => {
-            subforum.id
+            return subforum.id
         })
 
         const {
@@ -63,7 +63,7 @@ export async function GET(req: Request) {
                 };
             };
         }
-        console.log(whereClause, validCommunityIds)
+        // console.log(whereClause, validCommunityIds)
 
         const posts = await db.post.findMany({
             take: parseInt(limit),

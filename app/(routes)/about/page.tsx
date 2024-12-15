@@ -3,33 +3,18 @@
 import React from 'react'
 import { useEffect, useState } from "react"
 import Image from "next/image"
-import { motion, Variants } from "framer-motion"
-import { useRouter } from 'next/navigation'
+import { motion } from "framer-motion"
 
-import { Button } from "@/components/ui/button"
 import IntroSection from './components/IntroSection'
 import PostSection from './components/PostSection'
 import CommentSection from './components/CommentSection'
 import VoteSection from './components/VoteSection'
 import StatsSection from './components/StatsSection'
 import Footer from './components/Footer'
-import Link from 'next/link'
 
-const page = () => {
-    const itemVariants: Variants = {
-        hidden: { opacity: 0, y: 30 },
-        visible: {
-            opacity: 1,
-            y: 0,
-            transition: {
-                type: 'spring',
-                stiffness: 70,
-                damping: 20,
-                duration: 0.8,
-            },
-        },
-    };
-    const router = useRouter();
+
+const Page = () => {
+   
 
     const [mounted, setMounted] = useState(false)
 
@@ -140,4 +125,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Page

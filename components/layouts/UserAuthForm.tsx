@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { FC, useState } from 'react'
+import { useState } from 'react'
 
 import { cn } from '@/lib/utils'
 import { signIn } from 'next-auth/react'
@@ -12,7 +12,10 @@ import { Icons } from '../icons/Icons'
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
+const UserAuthForm  = ({ 
+  className, 
+  ...props 
+} : UserAuthFormProps) => {
   const { toast } = useToast()
   const [isLoading, setIsLoading] = useState<boolean>(false)
 

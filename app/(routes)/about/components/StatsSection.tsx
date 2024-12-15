@@ -162,7 +162,7 @@ export default function StatsSection() {
                         className="bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 text-white font-semibold px-12 py-8 text-xl rounded-full shadow-lg transform hover:scale-110 transition-transform duration-500 relative overflow-hidden group"
                     >
                         <span className="relative z-10">
-                            <a href="/">
+                            <a href={"/"}>
 
                                 Explore Forumly
 

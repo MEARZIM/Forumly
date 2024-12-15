@@ -38,3 +38,34 @@ export const PostVoteValidator = z.object({
 })
 
 export type PostVoteRequest = z.infer<typeof PostVoteValidator>
+
+
+// Comment Validator
+export const CommentValidator = z.object({
+    postId: z.string(),
+    text: z.string(),
+    replyToId: z.string().optional()
+})
+
+export type CommentRequest = z.infer<typeof CommentValidator>
+
+
+// Comment Vote Validator
+export const CommentVoteValidator = z.object({
+    commentId: z.string(),
+    voteType: z.enum(['UP', 'DOWN']),
+})
+
+export type CommentVoteRequest = z.infer<typeof CommentVoteValidator>
+
+
+// Username Validator
+export const UsernameValidator = z.object({
+    name: z
+        .string()
+        .min(3, { message: "Username must be at least 3 characters long." })
+        .max(32, { message: "Username cannot exceed 32 characters." })
+        .regex(/^[a-zA-Z0-9_]+$/, {
+            message: "Username can only contain letters, numbers, and underscores.",
+        }),
+})

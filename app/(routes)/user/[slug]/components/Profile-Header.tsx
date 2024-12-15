@@ -1,14 +1,14 @@
 "use client"
 
 import React from 'react'
-import { Menu, MessageCircle, MoreHorizontal, Plus } from 'lucide-react'
+import { Menu, MessageCircle, Plus } from 'lucide-react'
 
 import { Button } from "@/components/ui/button"
 import { useSidebar } from '@/hooks/use-sidebar'
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 
 interface Props {
-    userData: String
+    userData: string
 }
 
 const ProfileHeader = ({
@@ -17,7 +17,7 @@ const ProfileHeader = ({
     const sidebar = useSidebar();
     return (
         <>
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex flex-row bg-inherit items-center justify-between gap-4">
                 <div>
                     <div className='pb-2'>
                         <Avatar className="w-16 h-16 bg-yellow-300">

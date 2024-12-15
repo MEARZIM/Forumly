@@ -1,22 +1,16 @@
 import React from 'react'
-import { notFound } from 'next/navigation'
 
 import { db } from '@/lib/db'
 import { Sidebar } from '@/components/layouts/Sidebar'
 import ProfileStatsCard from './components/Profile-Stats-Card'
 import ProfileModeratorCard from './components/Profile-Moderator-Card'
-import { getAuthSession } from '@/auth'
 
 const layout = async ({
     children
 }: {
     children: React.ReactNode
 }) => {
-    const session = await getAuthSession();
     
-    if (!session?.user) {
-        return notFound();
-    }
 
     const resentSubForum = await db.subforum.findMany({
         take: 2,

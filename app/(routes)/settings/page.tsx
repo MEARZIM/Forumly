@@ -1,9 +1,26 @@
 import React from 'react'
 
-const SettingsPage = () => {
+import { getAuthSession } from '@/auth';
+import UserForm from '@/components/layouts/UserForm';
+
+export const metadata = {
+  title: 'Forumly | Settings',
+  description: 'Manage account and settings'
+}
+
+const SettingsPage = async () => {
+
+  const session = await getAuthSession();
+
   return (
     <div>
-      This is a Settings Page.
+      <UserForm
+        user={{
+          id: session?.user.id || '',
+          username: session?.user.username || '',
+        }}
+        className='w-fit'
+      />
     </div>
   )
 }

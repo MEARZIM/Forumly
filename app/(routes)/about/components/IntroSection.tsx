@@ -49,7 +49,12 @@ const IntroSection = () => {
                                 animate={{ opacity: [0.8, 1, 0.8] }}
                                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                             >
-                                Forumly is a platform designed to foster meaningful connections through conversation. Whether you're looking to discuss ideas, share insights, or build lasting relationships, Forumly is your space to connect with like-minded individuals. The platform enables seamless communication across diverse topics, creating a dynamic environment where every voice is heard. Whether you're a casual user or a community leader, Forumly provides the tools and features you need to grow, share, and engage in discussions that matter. Experience the power of conversation with Forumly.
+                                Forumly is a platform designed to foster meaningful connections through conversation. 
+                                Whether you are looking to discuss ideas, share insights, or build lasting relationships, 
+                                Forumly is your space to connect with like-minded individuals. 
+                                The platform enables seamless communication across diverse topics, creating a dynamic environment where every voice is heard. 
+                                Whether you are a casual user or a community leader, Forumly provides the tools and features you need to grow, share, and engage in 
+                                discussions that matter. Experience the power of conversation with Forumly.
                             </motion.p>
                         </div>
                     </div>

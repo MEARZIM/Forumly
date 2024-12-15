@@ -35,11 +35,6 @@ const Navbar = async () => {
                         })}>
                             Sign In
                         </Link>
-                        <Link href='/signUp' className={buttonVariants({
-                            variant: "outline",
-                        })}>
-                            Sign Up
-                        </Link>
                     </div>
                 )}
 
