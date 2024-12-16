@@ -6,6 +6,7 @@ import { Menu, MessageCircle, Plus } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { useSidebar } from '@/hooks/use-sidebar'
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { useSession } from 'next-auth/react'
 
 interface Props {
     userData: string
@@ -15,6 +16,8 @@ const ProfileHeader = ({
     userData
 }: Props) => {
     const sidebar = useSidebar();
+    const { data: session } = useSession();
+
     return (
         <>
             <div className="flex flex-row bg-inherit items-center justify-between gap-4">
@@ -34,14 +37,15 @@ const ProfileHeader = ({
                                 <p className="text-sm text-muted-foreground">u/{userData}</p>
                             </div>
                             <div className="flex gap-2 mt-2 sm:mt-0">
-                                <Button className="flex-1 sm:flex-none">
-                                    <Plus className="mr-2 h-4 w-4" />
-                                    Follow
-                                </Button>
-                                <Button variant="secondary" className="flex-1 sm:flex-none">
-                                    <MessageCircle className="mr-2 h-4 w-4" />
-                                    Chat
-                                </Button>
+                                {userData !== session?.user.username ? (
+                                    <>
+                                        <Button className="flex-1 flex items-center gap-1 bg-blue-600 text-white hover:bg-blue-700 sm:flex-none">
+                                            <MessageCircle className="h-4 w-4 mb-1" />
+                                            Chat
+                                        </Button>
+                                    </>
+                                ) : null}
+
                             </div>
                         </div>
                     </div>

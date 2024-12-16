@@ -6,11 +6,13 @@ import ProfileStatsCard from './components/Profile-Stats-Card'
 import ProfileModeratorCard from './components/Profile-Moderator-Card'
 
 const layout = async ({
-    children
+    children,
+    params
 }: {
     children: React.ReactNode
+    params: Promise<{ slug: string }>
 }) => {
-    
+    const slug = (await params).slug;
 
     const resentSubForum = await db.subforum.findMany({
         take: 2,
@@ -43,8 +45,8 @@ const layout = async ({
                         {children}
                     </div>
                     <div className="lg:col-span-1 space-y-6">
-                        <ProfileStatsCard />
-                        <ProfileModeratorCard />
+                        <ProfileStatsCard username={slug} />
+                        <ProfileModeratorCard username={slug} />
                     </div>
                 </div>
             </div>
