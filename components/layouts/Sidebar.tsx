@@ -39,7 +39,7 @@ const RecentSubforums = ({ resentSubForum }: { resentSubForum: Subforum[] }) => 
                     "w-full justify-start",
                 )}
             >
-                r/{forum.name}
+                f/{forum.name}
             </Link>
         ))}
     </div>
