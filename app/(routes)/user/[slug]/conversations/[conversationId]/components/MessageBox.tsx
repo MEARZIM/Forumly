@@ -34,7 +34,7 @@ const MessageBox: React.FC<MessageBoxProps> = ({
         isOwn && "justify-end"
     );
 
-
+    console.log(seenList);
 
     const avatar = clsx(isOwn && "order-2");
 
