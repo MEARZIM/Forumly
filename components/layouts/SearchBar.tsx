@@ -99,7 +99,7 @@ const SearchBar = () => {
               value={subforum.name}
             >
               <Users className="mr-2 h-4 w-4" />
-              <a href={`/community/${subforum.name}`}>r/{subforum.name}</a>
+              <a href={`/community/${subforum.name}`}>f/{subforum.name}</a>
             </CommandItem>
           ))}
         </CommandList>

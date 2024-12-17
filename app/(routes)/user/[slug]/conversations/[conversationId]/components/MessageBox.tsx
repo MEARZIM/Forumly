@@ -30,7 +30,7 @@ const MessageBox: React.FC<MessageBoxProps> = ({
         .join(', ');
 
     const container = clsx(
-        "flex gap-3 p-4",
+        "flex gap-3 p-2",
         isOwn && "justify-end"
     );
 

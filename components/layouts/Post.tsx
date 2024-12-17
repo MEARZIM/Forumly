@@ -133,7 +133,7 @@ const Post = ({
                 href={`/community/${subforumName}`}
                 className="font-bold text-gray-900 hover:underline"
               >
-                <h3 className="font-semibold text-gray-900 dark:text-gray-100">r/{subforumName}</h3>
+                <h3 className="font-semibold text-gray-900 dark:text-gray-100">f/{subforumName}</h3>
               </a>
               <p className="text-sm text-gray-500 dark:text-gray-400">
                 Posted by

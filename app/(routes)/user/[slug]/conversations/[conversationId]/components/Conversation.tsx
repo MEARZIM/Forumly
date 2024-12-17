@@ -16,23 +16,23 @@ import { FullMessageType } from "@/types/conversation";
 
 
 interface Props {
-    conversationId: string
-    messages: FullMessageType[]
+  conversationId: string
+  messages: FullMessageType[]
 }
 
 const Conversation = ({
-    conversationId,
-    messages
+  conversationId,
+  messages
 }: Props) => {
   const [isOpen, setIsOpen] = useState(true)
   const router = useRouter();
 
-  useEffect(()=> {
+  useEffect(() => {
     if (isOpen === false) {
       setIsOpen(false);
       router.back();
     }
-  },[isOpen])
+  }, [isOpen])
 
 
   return (
@@ -43,8 +43,8 @@ const Conversation = ({
             <SheetTitle>Chat</SheetTitle>
           </SheetHeader>
           <div className="flex flex-col h-[calc(100vh-120px)]">
-            <ScrollArea className="flex-grow p-4 space-y-4">
-            <Body initialMessages={messages} />
+            <ScrollArea className="flex-grow p-0 space-y-4">
+              <Body initialMessages={messages} />
             </ScrollArea>
             <Form />
           </div>
