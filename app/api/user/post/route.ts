@@ -45,6 +45,7 @@ export async function GET(req: Request) {
                     votes: true,
                     author: true,
                     comments: true,
+                    SavedPost: true,
                 },
                 where: {
                     OR: [
@@ -65,6 +66,7 @@ export async function GET(req: Request) {
                     votes: true,
                     author: true,
                     comments: true,
+                    SavedPost: true,
                 },
                 where: {
                     author: { username: username },
@@ -81,6 +83,7 @@ export async function GET(req: Request) {
                     votes: true,
                     author: true,
                     comments: true,
+                    SavedPost: true,
                 },
                 where: {
                     comments: {

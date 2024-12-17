@@ -17,7 +17,7 @@ interface Props {
 const CommunityPageLayout = async ({
     params,
     children
-} : Props) => {
+}: Props) => {
 
     const { slug } = await params;
     const session = await getAuthSession()
@@ -30,7 +30,8 @@ const CommunityPageLayout = async ({
             posts: {
                 include: {
                     author: true,
-                    votes: true
+                    votes: true,
+                    SavedPost: true,
                 }
             }
         }
@@ -73,7 +74,7 @@ const CommunityPageLayout = async ({
                     <div className='overflow-hidden h-fit rounded-lg border border-gray-200 order-first md:order-last'>
                         <div className='px-6 py-4'>
                             <p className='font-semibold py-3 flex items-center'>
-                                About r/
+                                About f/
                                 <TextHighlighter text={subforum.name} />
                             </p>
                         </div>
