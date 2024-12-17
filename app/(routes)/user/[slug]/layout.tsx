@@ -4,7 +4,6 @@ import { db } from '@/lib/db'
 import { Sidebar } from '@/components/layouts/Sidebar'
 import ProfileStatsCard from './components/Profile-Stats-Card'
 import ProfileModeratorCard from './components/Profile-Moderator-Card'
-import ChatBox from './components/ChatBox'
 
 const layout = async ({
     children,
@@ -48,7 +47,6 @@ const layout = async ({
                     <div className="lg:col-span-1 space-y-6">
                         <ProfileStatsCard username={slug} />
                         <ProfileModeratorCard username={slug} />
-                        <ChatBox />
                     </div>
                 </div>
             </div>
