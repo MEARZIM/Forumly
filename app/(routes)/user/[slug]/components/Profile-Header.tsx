@@ -29,6 +29,8 @@ const ProfileHeader = ({ userData }: Props) => {
         username: userData, // Ensure session.user exists
       });
 
+      console.log(data);
+
       return data; // API response containing conversation ID
     },
     onSuccess: (conversationData) => {
@@ -37,7 +39,7 @@ const ProfileHeader = ({ userData }: Props) => {
     },
     onError: (error) => {
       console.error("Failed to create conversation:", error);
-      alert("Something went wrong. Please try again.");
+      
     },
   });
 

@@ -13,7 +13,6 @@ const ConversationPage = async ({
 }) => {
 
   const slug = (await params).conversationId;
-  const messages = await getMessages(slug);
 
   if (!slug) {
     return notFound();

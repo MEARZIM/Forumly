@@ -14,7 +14,7 @@ export async function POST(
             username,
         } = body;
 
-
+        console.log(username)
         if (!currentUser) {
             return new NextResponse('Unauthorized', { status: 401 });
         }
@@ -78,7 +78,7 @@ export async function POST(
         })
 
         return NextResponse.json(newConversation);
-    } catch (error: any) {
+    } catch (error) {
         return new NextResponse('Internal Error', { status: 500 });
     }
 }
