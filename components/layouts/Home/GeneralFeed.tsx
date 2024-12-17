@@ -13,6 +13,7 @@ const GeneralFeed = async () => {
       author: true,
       comments: true,
       subForum: true,
+      SavedPost: true
     },
     take: INFINITE_SCROLL_PAGINATION_NUMBER,
   })

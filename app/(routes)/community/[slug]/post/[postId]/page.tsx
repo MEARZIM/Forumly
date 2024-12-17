@@ -58,6 +58,7 @@ const page = async ({
             },
             include: {
                 votes: true,
+                SavedPost: true
             },
         })
         return posts;

@@ -42,7 +42,7 @@ const CustomFeed = async () => {
         take: INFINITE_SCROLL_PAGINATION_NUMBER,
     })
 
-    return <PostFeed initialPosts={posts} />
+    return <PostFeed initialPosts={[]} />
 }
 
 export default CustomFeed

@@ -67,7 +67,7 @@ export async function GET(req: Request) {
 
         const posts = await db.post.findMany({
             take: parseInt(limit),
-            skip: (parseInt(page) - 1) * parseInt(limit,10), 
+            skip: (parseInt(page) - 1) * parseInt(limit, 10),
             orderBy: {
                 createdAt: 'desc',
             },
@@ -76,6 +76,7 @@ export async function GET(req: Request) {
                 votes: true,
                 author: true,
                 comments: true,
+                SavedPost: true,
             },
             where: whereClause
         })

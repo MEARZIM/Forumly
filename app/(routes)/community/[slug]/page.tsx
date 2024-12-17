@@ -28,6 +28,7 @@ const CommunityPage = async ({
                     votes: true,
                     comments: true,
                     subForum: true,
+                    SavedPost: true,
                 },
                 orderBy: {
                     createdAt: 'desc'
@@ -36,22 +37,23 @@ const CommunityPage = async ({
             },
         },
     })
-    
+
 
     if (!subforum) {
         return notFound()
     }
 
+
     return (
 
         <>
             <h1 className='font-bold text-3xl md:text-4xl h-14 mx-2'>
-                r/{subforum.name}
+                f/{subforum.name}
             </h1>
             <MiniCreatePost session={session} />
             {/* Dispaly post */}
             <PostFeed
-                initialPosts={subforum.posts}
+                initialPosts={[]}
                 subforumName={subforum.name}
             />
         </>

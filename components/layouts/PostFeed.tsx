@@ -63,18 +63,27 @@ const PostFeed = ({
     return (
         <ul className='flex flex-col col-span-2 space-y-6'>
             {posts.map((post, index) => {
+                // Calculate the total votes for the post
                 const votesAmount = post.votes.reduce((accumulator, vote) => {
-                    if (vote.type === 'UP') return accumulator + 1
-                    if (vote.type === 'DOWN') return accumulator - 1
-                    return accumulator
-                }, 0)
+                    if (vote.type === 'UP') return accumulator + 1;
+                    if (vote.type === 'DOWN') return accumulator - 1;
+                    return accumulator;
+                }, 0);
 
+                // Find the current vote of the logged-in user
                 const currentVote = post.votes.find(
                     (vote) => vote.userId === session?.user.id
-                )
+                );
+                // Check if the current post is saved by the logged-in user
+                const savedPost = (post.SavedPost).find(
+                    (savedPost) => savedPost.userId === session?.user.id
+                );
 
+                const isSaved = savedPost !== undefined;
+
+
+                // Return the last post with the ref for intersection observer
                 if (index === posts.length - 1) {
-
                     return (
                         <li key={post.id} ref={ref}>
                             <Post
@@ -84,10 +93,12 @@ const PostFeed = ({
                                 votesAmount={votesAmount}
                                 currentVote={currentVote}
                                 currentUserId={session?.user?.id}
+                                initialSavedState={isSaved} // Pass the saved status to the Post component
                             />
                         </li>
-                    )
+                    );
                 } else {
+                    // Return other posts normally
                     return (
                         <Post
                             key={post.id}
@@ -97,17 +108,20 @@ const PostFeed = ({
                             votesAmount={votesAmount}
                             currentVote={currentVote}
                             currentUserId={session?.user?.id}
+                            initialSavedState={isSaved} // Pass the saved status to the Post component
                         />
-                    )
+                    );
                 }
             })}
 
+            {/* Show loading spinner if fetching next page */}
             {isFetchingNextPage && (
                 <li className='flex justify-center'>
                     <Loader2 className='w-6 h-6 text-zinc-500 animate-spin' />
                 </li>
             )}
         </ul>
+
     )
 }
 
