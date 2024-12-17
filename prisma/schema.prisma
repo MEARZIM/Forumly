@@ -63,6 +63,7 @@ model User {
   CommentVote  CommentVote[]
   Subscription Subscription[]
 
+<<<<<<< HEAD
   conversationIds String[]       @db.ObjectId
   conversations   Conversation[] @relation(fields: [conversationIds], references: [id])
 
@@ -70,6 +71,9 @@ model User {
   seenMessages   Message[] @relation("Seen", fields: [seenMessageIds], references: [id])
 
   messages Message[]
+=======
+  SavedPost SavedPost[]
+>>>>>>> 238b155bdc72a9c6b25e0316102e46728e29f85a
 }
 
 model Subforum {
@@ -100,6 +104,11 @@ model Post {
 
   comments Comment[]
   votes    Vote[]
+<<<<<<< HEAD
+=======
+
+  SavedPost SavedPost[]
+>>>>>>> 238b155bdc72a9c6b25e0316102e46728e29f85a
 }
 
 model Comment {
@@ -155,6 +164,7 @@ model Subscription {
   subforumId String   @db.ObjectId
 }
 
+<<<<<<< HEAD
 model Conversation {
   id            String   @id @default(auto()) @map("_id") @db.ObjectId
   createdAt     DateTime @default(now())
@@ -183,4 +193,17 @@ model Message {
 
   senderId String @db.ObjectId
   sender   User   @relation(fields: [senderId], references: [id], onDelete: Cascade)
+=======
+model SavedPost {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String @db.ObjectId
+  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId String @db.ObjectId
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, postId]) // Prevents a user from saving the same post multiple times
+>>>>>>> 238b155bdc72a9c6b25e0316102e46728e29f85a
 }

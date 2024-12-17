@@ -83,6 +83,12 @@ const UserFeed = ({
                     (vote) => vote.userId === session?.user.id
                 );
 
+                const savedPost = (post.SavedPost ?? []).find(
+                    (savedPost) => savedPost.userId === session?.user.id
+                );
+
+                const isSaved = savedPost !== undefined;
+
                 if (index === posts.length - 1) {
                     return (
                         <li key={post.id} ref={ref}>
@@ -93,6 +99,7 @@ const UserFeed = ({
                                 votesAmount={votesAmount}
                                 currentVote={currentVote}
                                 currentUserId={session?.user?.id}
+                                initialSavedState={isSaved} // Pass the saved status to the Post component
                             />
                         </li>
                     );
@@ -106,6 +113,7 @@ const UserFeed = ({
                             votesAmount={votesAmount}
                             currentVote={currentVote}
                             currentUserId={session?.user?.id}
+                            initialSavedState={isSaved}
                         />
                     );
                 }
