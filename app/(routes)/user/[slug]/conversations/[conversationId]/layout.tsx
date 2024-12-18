@@ -1,8 +1,5 @@
 import { notFound } from "next/navigation";
 
-import getMessages from "@/actions/getMessages";
-
-
 
 const ConversationPage = async ({
   params,
