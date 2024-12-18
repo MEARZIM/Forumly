@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { User } from 'next-auth'
-import { signOut } from 'next-auth/react'
+import { signOut, useSession } from 'next-auth/react'
 
 import {
   DropdownMenu,
@@ -18,6 +18,8 @@ interface UserAccountNavProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export function UserAccountNav({ user }: UserAccountNavProps) {
+  const { data: session } = useSession();
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className=''>
@@ -41,6 +43,14 @@ export function UserAccountNav({ user }: UserAccountNavProps) {
         <DropdownMenuItem asChild>
           <Link href='/'>Feed</Link>
         </DropdownMenuItem>
+
+        {session && (
+          <>
+            <DropdownMenuItem asChild>
+              <Link href={`/user/${session?.user.username}`}>Profile</Link>
+            </DropdownMenuItem>
+          </>
+        )}
 
         <DropdownMenuItem asChild>
           <Link href='/community/create'>Create Community</Link>

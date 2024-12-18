@@ -1,5 +1,5 @@
 import { Suspense } from 'react'
-import { Dot, Share } from 'lucide-react'
+import { Dot } from 'lucide-react'
 import { notFound } from 'next/navigation'
 import { Post, User, Vote } from '@prisma/client'
 
@@ -15,6 +15,8 @@ import { Separator } from '@/components/ui/separator'
 
 import { ShareButton } from './components/ShareButton'
 import TextToSpeechButton from './components/TextToSpeechButton'
+import { LanguageSelector } from './components/LanguageSelector'
+import ContentDisplay from './components/ContentDisplay'
 
 
 interface Props {
@@ -81,6 +83,7 @@ const page = async ({
                 </Suspense>
 
                 <div className='w-[100px] sm:w-full flex-1 bg-white p-4 rounded-sm'>
+
                     <p className='max-h-40 mt-1 truncate text-xs text-gray-500 flex items-center'>
                         Posted by
                         <a
@@ -92,6 +95,8 @@ const page = async ({
                         <Dot />
                         {formatTimeToNow(new Date(post?.createdAt ?? cachedPost.createdAt))}
                     </p>
+
+
 
 
 
@@ -111,14 +116,9 @@ const page = async ({
 
 
                     <div className='mb-10'>
-                        <Suspense
-                            fallback={
-                                <SkeletonCard />
-                            }>
-                            <EditorOutput
-                                content={post?.content ?? cachedPost.content}
-                            />
-                        </Suspense>
+                        <ContentDisplay
+                            content={post?.content ?? cachedPost.content}
+                        />
                     </div>
 
                     <Separator className='bg-black' />

@@ -55,8 +55,9 @@ const TextToSpeechButton = ({ content }: Props) => {
                 }
             }
         });
+        const cleanText = contentText.replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ').trim();
+        setTextToSpeak(cleanText);
 
-        setTextToSpeak(contentText);
     }, [content]);
 
     const handleSpeak = () => {

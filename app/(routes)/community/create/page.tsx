@@ -79,7 +79,7 @@ const CreateACommunityPage = () => {
         description: 'Your new community has been successfully created.',
         variant: 'default',
       });
-      router.push(`/community/${data}`); 
+      router.push(`/community/${data}`);
     },
   });
 
@@ -113,7 +113,7 @@ const CreateACommunityPage = () => {
                   <FormControl>
                     <div className='relative'>
                       <div className='absolute text-sm left-0 w-8 inset-y-0 grid place-items-center text-zinc-400'>
-                        r/
+                        f/
                       </div>
                       <Input
                         type='text'
