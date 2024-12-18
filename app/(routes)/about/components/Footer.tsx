@@ -37,7 +37,7 @@ const Footer = () => {
                     <li>
                         <motion.a
                             whileHover={{ scale: 1.1 }}
-                            href="#"
+                            href="/contacts"
                             className="hover:underline text-blue-600"
                         >
                             Contact
