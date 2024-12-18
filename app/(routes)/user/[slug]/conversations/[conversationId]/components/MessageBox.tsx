@@ -26,15 +26,13 @@ const MessageBox: React.FC<MessageBoxProps> = ({
     const isOwn = session?.data?.user?.email === data?.sender?.email;
     const seenList = (data.seen || [])
         .filter((user) => user.email !== data?.sender?.email)
-        .map((user) => user.name)
+        .map((user) => user.username)
         .join(', ');
 
     const container = clsx(
         "flex gap-3 p-2",
         isOwn && "justify-end"
     );
-
-
 
     const avatar = clsx(isOwn && "order-2");
 
@@ -45,7 +43,7 @@ const MessageBox: React.FC<MessageBoxProps> = ({
 
     const message = clsx(
         "text-sm w-fit overflow-hidden",
-        isOwn ? 'bg-orange-500 text-white' : 'bg-gray-100',
+        isOwn ? 'bg-blue-500 text-white' : 'bg-blue-100',
         data.image ? 'rounded-md p-0' : 'rounded-full py-2 px-3'
     );
 
@@ -53,14 +51,14 @@ const MessageBox: React.FC<MessageBoxProps> = ({
         <div className={container}>
             <div className={avatar}>
                 <Avatar>
-                    <AvatarImage src={data.sender.image || ''} alt="@shadcn" />
+                    <AvatarImage src="/placeholder.jpg" alt="profile" />
                     <AvatarFallback>U</AvatarFallback>
                 </Avatar>
             </div>
             <div className={body}>
                 <div className="flex items-center gap-1">
                     <div className="text-sm text-gray-500">
-                        {data.sender.name}
+                        {data.sender.username}
                     </div>
                     <div className="text-xs text-gray-400">
                         {format(new Date(data.createdAt), 'p')}

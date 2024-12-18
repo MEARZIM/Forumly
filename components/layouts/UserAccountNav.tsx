@@ -47,6 +47,10 @@ export function UserAccountNav({ user }: UserAccountNavProps) {
         </DropdownMenuItem>
 
         <DropdownMenuItem asChild>
+          <Link href='/messenger'>Messenger</Link>
+        </DropdownMenuItem>
+
+        <DropdownMenuItem asChild>
           <Link href='/settings'>Settings</Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
