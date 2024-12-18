@@ -114,7 +114,7 @@ const CommunityPageLayout = async ({
                                     className: 'w-full my-2',
                                 })}
                                 // if 'community/${slug}/submit' is created a problem it redirects back to it to http://localhost:3000/community/community/react/submit
-                                href={`${slug}/submit`}
+                                href={process.env.APP_URL + `/community/${slug}/submit`}
                             >
                                 Create Post
                             </Link>
