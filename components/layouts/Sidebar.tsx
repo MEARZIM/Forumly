@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { Subforum } from "@prisma/client";
 import { usePathname } from "next/navigation";
-import { ChevronDown, Home, Rocket, Settings } from 'lucide-react';
+import { Bookmark, ChevronDown, Home, Rocket, Settings } from 'lucide-react';
 
 import { cn } from "@/lib/utils";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -67,7 +67,7 @@ const CommunitySubforums = ({ communitySubForum }: { communitySubForum: Subforum
 export const Sidebar = ({ resentSubForum, communitySubForum }: Props) => {
     const url = usePathname();
     const sidebar = useSidebar();
-    
+
 
     return (
         <div>
@@ -103,6 +103,19 @@ export const Sidebar = ({ resentSubForum, communitySubForum }: Props) => {
                             >
                                 <Rocket className="mr-2 h-4 w-4" />
                                 Popular
+                            </Link>
+                            <Link
+                                href="/saved"
+                                className={cn(
+                                    buttonVariants({
+                                        variant: "sidebarButton",
+                                    }),
+                                    "w-full justify-start",
+                                    url === '/saved' ? `bg-white text-black` : ``
+                                )}
+                            >
+                                <Bookmark className="mr-2 h-4 w-4" />
+                                Saved
                             </Link>
                             <Link
                                 href="/settings"
