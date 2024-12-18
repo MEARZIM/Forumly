@@ -55,6 +55,7 @@
     "next": "15.0.2",
     "next-auth": "^4.24.10",
     "next-cloudinary": "^6.16.0",
+    "next-share": "^0.27.0",
     "prisma": "^6.0.1",
     "pusher": "^5.2.0",
     "pusher-js": "^8.4.0-rc2",
