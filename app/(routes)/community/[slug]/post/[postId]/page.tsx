@@ -14,6 +14,7 @@ import CommentSection from '@/components/layouts/Comments/CommentSection'
 import { Separator } from '@/components/ui/separator'
 
 import { ShareButton } from './components/ShareButton'
+import TextToSpeechButton from './components/TextToSpeechButton'
 
 
 interface Props {
@@ -93,13 +94,19 @@ const page = async ({
                     </p>
 
 
-                    
+
                     <div className='flex justify-between items-center'>
 
                         <h1 className='text-3xl font-bold py-2 leading-6 text-gray-900 '>
                             {post?.title ?? cachedPost.title}
                         </h1>
-                        <ShareButton/>
+                        <div className='flex items-center gap-2'>
+                            <TextToSpeechButton
+                                content={post?.content ?? cachedPost.content}
+                            />
+                            <ShareButton />
+
+                        </div>
                     </div>
 
 
