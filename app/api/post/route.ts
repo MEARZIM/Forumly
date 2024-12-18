@@ -12,13 +12,10 @@ export async function GET(req: Request) {
         const url = new URL(req.url);
         const session = await getAuthSession();
 
-        if (!session?.user) {
-            return new Response("Unauthorized", { status: 401 });
-        }
-
+    
         const followedCommunities = await db.subscription.findMany({
             where: {
-                userId: session.user.id,
+                userId: session?.user.id,
             },
             include: {
                 subforum: true,
